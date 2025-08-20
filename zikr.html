@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapelet Zikr</title>
+  <meta name="theme-color" content="#0d1b2a" />
+  <style>
+    :root{
+      --bg:#0b1320;        /* fond */
+      --bg-soft:#0f1e33;   /* cartes */
+      --fg:#e6edf3;        /* texte */
+      --muted:#9fb3c8;     /* texte secondaire */
+      --accent:#032e51;    /* vert */
+      --ring:#2dd4bf;      /* anneau */
+      --danger:#ef4444;    /* rouge */
+      --shadow:0 10px 25px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      margin-top:20%;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%, #10243e, transparent 60%),
+                 radial-gradient(900px 600px at -20% 120%, #061327, transparent 60%),
+                 var(--bg);
+      color:var(--fg);
+      display:flex;align-items:center;justify-content:center;
+      padding:24px;
+    }
+    .app{
+      width:min(820px, 100%);
+      display:grid;gap:16px;
+      grid-template-columns: 1fr;
+    }
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .title{font-size:clamp(18px,2.6vw,26px);font-weight:700;letter-spacing:.3px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    button, select, input{
+      border:none;outline:none;color:var(--fg);
+      background:var(--bg-soft);padding:10px 14px;border-radius:14px;
+      box-shadow:var(--shadow);
+    }
+    button{cursor:pointer;transition:transform .06s ease,opacity .2s ease}
+    button:active{transform:translateY(1px)}
+    .btn-accent{background:linear-gradient(135deg, var(--accent), #10b981)}
+    .btn-danger{background:linear-gradient(135deg, #ef4444, #dc2626)}
+    .card{background:rgba(255,255,255,.04);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    .grid{display:grid;gap:16px;grid-template-columns:1.1fr .9fr}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+    /* compteur central */
+    .dial-wrap{display:grid;place-items:center;height:380px}
+    .dial{
+      position:relative;display:grid;place-items:center;
+      width:min(320px, 72vw); aspect-ratio:1/1;border-radius:50%;
+      background:radial-gradient(closest-side, #0e1b2c, #0b1320);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), var(--shadow);
+      overflow:hidden;
+    }
+    .dial .count{font-variant-numeric:tabular-nums; font-size:clamp(40px,10vw,64px);font-weight:800}
+    .dial .sub{color:var(--muted);font-size:14px;margin-top:2px}
+    .ring{position:absolute;inset:10px;border-radius:50%;}
+    .ring::before{
+      content:"";position:absolute;inset:0;border-radius:50%;
+      background:conic-gradient(var(--ring) var(--p,0%), rgba(255,255,255,.06) 0);
+      -webkit-mask:radial-gradient(circle 64% at 50% 50%, transparent 97%, black 99%);
+              mask:radial-gradient(circle 64% at 50% 50%, transparent 97%, black 99%);
+      filter:drop-shadow(0 0 18px rgba(45,212,191,.35));
+      transition:--p .3s ease;
+    }
+
+    /* panneau droit */
+    .side{display:grid;gap:16px}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    label{font-size:13px;color:var(--muted)}
+    .preset{display:flex;gap:8px;flex-wrap:wrap}
+    .preset button{padding:8px 12px}
+
+    /* grande touche incrément */
+    .tap{
+      width:100%;border-radius:18px;padding:22px 20px;text-align:center;
+      font-size:clamp(18px,2.4vw,22px);font-weight:700;letter-spacing:.5px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .tap:hover{
+        background-color: #10b981;
+    }
+
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .footer{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+    .link{opacity:.85}
+    .link:hover{opacity:1}
+    .ciblenumber{
+     color:#dc2626
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="title">🧿SAMA KROUSS</div>
+      <div class="controls">
+        <button id="fsBtn" title="Plein écran">⛶</button>
+        <button id="vibBtn" title="Vibration ON/OFF">📳</button>
+        <button id="soundBtn" title="Son ON/OFF">🔊</button> 
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card dial-wrap">
+        <div class="dial" id="dial">
+          <div class="ring" id="ring"></div>
+          <div class="count" id="count">0</div>
+          <div class="sub" id="sub">Cible: 33 · Série 1/3</div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <div class="row" style="justify-content:space-between">
+            <div>
+              <div class="muted small">Dhikr actuel</div>
+              <div id="dhikrName" style="font-weight:700">Subḥān Allāh</div>
+            </div>
+            <div class="row">
+              <label for="target">Cible</label>
+              <select id="target" class="ciblenumber">
+                <option value="33" >33</option>
+                <option value="100" >100</option>
+                <option value="99" >99</option>
+                <option value="1000" >1000</option>
+                <option value="0" >Illimité</option>
+              </select>
+            </div>
+          </div>
+          <div class="preset" style="margin-top:10px">
+            <!-- <button class="btn-accent" data-name="Subḥān Allāh" data-sets="3" data-target="33">Subḥān Allāh</button>
+            <button class="btn-accent" data-name="Alḥamdulillāh" data-sets="3" data-target="33">Alḥamdulillāh</button>
+            <button class="btn-accent" data-name="Allāhu Akbar" data-sets="3" data-target="33">Allāhu Akbar</button> -->
+            <button class="btn-accent" data-name="Astafirlillāh" data-sets="3" data-target="100">Astafirlillāh</button>
+
+            <button   class="btn-accent"  data-name="Ṣalāt ʿalan-Nabī" data-sets="10" data-target="100">Ṣalāt ʿalan‑Nabī</button>
+             <button class="btn-accent"   data-name="Ṣubhanalah Alḥamdulillāh Allāhu Akbar " data-sets="4" data-target="33">Ṣubhanalah Alḥamdulillāh Allāhu Akbar</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <button id="tap" class="tap" title="Cliquer / Espace pour compter">wird</button><br><br>
+          <button id="resetBtn" class="btn-danger" title="Remettre à zéro">Réinitialiser</button>
+          <div class="footer">
+            <div class="muted small"></div>
+            <a class="link muted small" href="#" id="exportBtn"></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <label>Série</label>
+            <div class="row">
+              <button id="prevSet">◀</button>
+              <div id="setInfo" style="min-width:80px;text-align:center">1 /10</div>
+              <button id="nextSet">▶</button>
+            </div>
+          </div>
+          <div class="row" style="margin-top:8px">
+            <label for="step">Pas</label>
+            <select id="step">
+              <option value="1" selected>+1</option>
+              <option value="3">+3</option>
+              <option value="5">+5</option>
+              <option value="10">+10</option>
+            </select>
+             <button id="minusBtn" title="-1"></button> 
+            <button id="plusBtn" title="+1">+1</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+  </main>
+
+  <audio id="tick" preload="auto">
+    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA........" type="audio/mp3">
+  </audio>
+
+  <script>
+    // --- état et utilitaires ---
+    const $ = sel => document.querySelector(sel);
+    const countEl = $('#count');
+    const subEl = $('#sub');
+    const ringEl = $('#ring');
+    const tapBtn = $('#tap');
+    const resetBtn = $('#resetBtn');
+    const targetSel = $('#target');
+    const stepSel = $('#step');
+    const minusBtn = $('#minusBtn');
+    const plusBtn = $('#plusBtn');
+    const fsBtn = $('#fsBtn');
+    const vibBtn = $('#vibBtn');
+    const soundBtn = $('#soundBtn');
+    const prevSetBtn = $('#prevSet');
+    const nextSetBtn = $('#nextSet');
+    const setInfo = $('#setInfo');
+    const dhikrNameEl = $('#dhikrName');
+    const exportBtn = $('#exportBtn');
+    const tick = $('#tick');
+
+    const presets = Array.from(document.querySelectorAll('.preset button'));
+
+    const state = JSON.parse(localStorage.getItem('zikr-state')||'{}');
+    let count = state.count || 0;
+    let target = state.target || 33;
+    let setsTotal = state.setsTotal || 3; // ex. 3×33
+    let setIndex = Math.min(state.setIndex||0, Math.max(setsTotal-1,0));
+    let step = state.step || 1;
+    let dhikrName = state.dhikrName || 'Subḥān Allāh';
+    let vibrationOn = state.vibrationOn ?? true;
+    let soundOn = state.soundOn ?? false;
+
+    function save(){
+      localStorage.setItem('zikr-state', JSON.stringify({count,target,setsTotal,setIndex,step,dhikrName,vibrationOn,soundOn}));
+    }
+
+    function vibe(ms=15){ if(!vibrationOn) return; try{navigator.vibrate && navigator.vibrate(ms);}catch(_){} }
+    function beep(){ if(!soundOn) return; try{ tick.currentTime=0; tick.play(); }catch(_){} }
+
+    function updateUI(){
+      countEl.textContent = count;
+      const currentTarget = target || 0; // 0 => illimité
+      const progress = currentTarget ? Math.min(100, (count/currentTarget)*100) : 0;
+      ringEl.style.setProperty('--p', progress + '%');
+      const serieText = `${setsTotal>1?`Série ${setIndex+1}/${setsTotal}`:'Série 1/1'}`;
+      subEl.textContent = `${currentTarget?`Cible: ${currentTarget}`:'Cible: ∞'} · ${serieText}`;
+      targetSel.value = String(currentTarget);
+      stepSel.value = String(step);
+      setInfo.textContent = `${setIndex+1} / ${Math.max(setsTotal,1)}`;
+      dhikrNameEl.textContent = dhikrName;
+      vibBtn.textContent = vibrationOn? '📳' : '📴';
+      soundBtn.textContent = soundOn? '🔊' : '🔇';
+      save();
+    }
+
+    function next(){
+      const inc = parseInt(stepSel.value,10) || 1;
+      count += inc; beep(); vibe();
+      const currentTarget = target || 0;
+      if(currentTarget && count >= currentTarget){
+        // passage à la série suivante
+        if(setIndex < setsTotal-1){
+          setIndex++; count = 0; vibe(30);
+        } else {
+          // tout terminé
+          flash('✅ Dhikr terminé');
+          vibe(60);
+        }
+      }
+      updateUI();
+    }
+
+    function prev(){
+      count = Math.max(0, count-1); updateUI();
+    }
+
+    function reset(all=false){
+      count = 0;
+      if(all){ setIndex = 0; }
+      updateUI();
+    }
+
+    function flash(text){
+      const el = document.createElement('div');
+      el.textContent = text;
+      el.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#111827;color:white;padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:.98;z-index:9999;';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 1600);
+    }
+
+    // --- événements UI ---
+    tapBtn.addEventListener('click', next);
+    plusBtn.addEventListener('click', ()=>{ step=1; next(); });
+    minusBtn.addEventListener('click', ()=>{ prev(); });
+    resetBtn.addEventListener('click', ()=>{ reset(true); flash('Remis à zéro'); vibe(25); });
+
+    targetSel.addEventListener('change', e=>{ target = parseInt(e.target.value,10); updateUI(); });
+    stepSel.addEventListener('change', e=>{ step = parseInt(e.target.value,10); updateUI(); });
+
+    prevSetBtn.addEventListener('click', ()=>{ setIndex = Math.max(0, setIndex-1); count=0; updateUI(); });
+    nextSetBtn.addEventListener('click', ()=>{ setIndex = Math.min(setsTotal-1, setIndex+1); count=0; updateUI(); });
+
+    fsBtn.addEventListener('click', ()=>{
+      const el = document.documentElement;
+      if(!document.fullscreenElement){ el.requestFullscreen?.(); }
+      else{ document.exitFullscreen?.(); }
+    });
+
+    vibBtn.addEventListener('click', ()=>{ vibrationOn = !vibrationOn; updateUI(); flash('Vibration '+(vibrationOn?'ON':'OFF')); });
+    soundBtn.addEventListener('click', ()=>{ soundOn = !soundOn; updateUI(); flash('Son '+(soundOn?'ON':'OFF')); });
+
+    presets.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        dhikrName = b.dataset.name;
+        setsTotal = parseInt(b.dataset.sets||'1',10);
+        const t = parseInt(b.dataset.target||'33',10);
+        target = isNaN(t)?33:t;
+        setIndex = 0; count = 0; updateUI(); vibe(30);
+        flash('Préset appliqué');
+      })
+    });
+
+    // export simple (JSON)
+    exportBtn.addEventListener('click', e=>{
+      e.preventDefault();
+      const data = new Blob([JSON.stringify({date:new Date().toISOString(),count,target,setsTotal,setIndex,dhikrName}, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'zikr-session.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // clavier
+    window.addEventListener('keydown', e=>{
+      if(e.code==='Space'){ e.preventDefault(); next(); }
+      if(e.key==='r' || e.key==='R'){ reset(true); }
+      if(e.key==='Backspace'){ prev(); }
+    });
+
+    // gestes tactiles (tap n'importe où sur le cadran)
+    $('#dial').addEventListener('click', next);
+
+    // init UI
+    updateUI();
+  </script>
+</body>
+</html>

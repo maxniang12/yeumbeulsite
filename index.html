@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ville de Yeumbeul Sud</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="lesScripts.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+
+</head>
+<body>
+
+ <!-- Header principal -->
+<header class="header-top">
+    <div class="messagerie">
+        <i class="fas fa-envelope"></i> <span>Messagerie</span>
+    </div>
+    <div class="header-center">
+        <h1 class="ville-titre">COMMUNE D’ARRONDISSEMENT DE YEUMBEUL   <span>  SUD</span> </h1>
+        <img src="images/accu2.png" alt="Blason Yeumbeul Sud" class="blason">
+    </div>
+</header>
+
+
+
+
+    <!-- Barre de navigation -->
+    <!-- <nav class="navbar">
+        <div class="navbar-menu">
+                <a href="#">ACCUEIL</a>
+
+                <div class="dropdown">
+                     <a href="">LA COMMUNE</a> 
+                    <div class="dropdown-content">
+                        <a href="">Présentation</a>
+                        <a href="">Histoire</a>
+                        <a href="">Structures</a>
+                        
+                    </div>
+                </div>
+
+                <a href="">LE MAIRE</a>
+                <a href="">LA CARTE</a>
+            </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </nav> -->
+
+    <!-- Barre de navigation -->
+<nav class="navbar">
+    <!-- Bouton hamburger pour mobile -->
+    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+
+    <!-- Menu -->
+    <div class="navbar-menu">
+        <a href="#">ACCUEIL</a>
+
+        <div class="dropdown">
+            <a href="#">LA COMMUNE</a>
+            <div class="dropdown-content">
+                <a href="#">Présentation</a>
+                <a href="#">Histoire</a>
+                <a href="#">Structures</a>
+            </div>
+        </div>
+
+        <a href="#">LE MAIRE</a>
+        <a href="#">LA CARTE</a>
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+     <!-- Overlay -->
+    <div class="overlay" onclick="toggleSidebar()"></div>
+</nav>
+
+   <!-- SLIDER -->
+  <section class="slider-section">
+  <div class="slider">
+    <div class="slide active" style="background-image: url('images/commune2.jpg')">
+      <div class="slide-text">
+        <h2>Bienvenue à Yeumbeul Sud</h2>
+        <p>Une commune dynamique et tournée vers l’avenir</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('images/commune.jpg')">
+      <div class="slide-text">
+        <h2>Nos quartiers, notre force</h2>
+        <p>Découvrez la richesse culturelle et sociale de Yeumbeul</p>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('images/stade.jpg')">
+      <div class="slide-text">
+        <h2>Projets & Initiatives</h2>
+        <p>Engagement pour le développement durable de la commune</p>
+      </div>
+    </div>
+
+    <!-- Flèches -->
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+
+    <!-- Points -->
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION : Anciens Maires -->
+<section class="anciens-maires">
+  <div class="maire"><h2>LES MAIRES</h2></div><br>
+  <div class="maires-container">
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 1">
+      <h3>M. Youssou DIOP</h3>
+      <p class="periode">2009 - 2014</p>
+    </div>
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 2">
+      <h3>M. Samba SOW</h3>
+      <p class="periode">2014 - 2019</p>
+    </div>
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 3">
+      <h3>M. Ibrahima Sow</h3>
+      <p class="periode">2019 - 2022</p>
+    </div>
+     <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 1">
+      <h3>M. Mamadou Diop</h3>
+      <p class="periode">2009 - 2014</p>
+    </div>
+    
+  </div><br><br>
+    <div class="maires-container">
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 1">
+      <h3>M. Mamadou Diop</h3>
+      <p class="periode">2009 - 2014</p>
+    </div>
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 2">
+      <h3>Mme Aissatou Faye</h3>
+      <p class="periode">2014 - 2019</p>
+    </div>
+    <div class="maire-card">
+      <img src="images/logo_user.png" alt="Ancien Maire 3">
+      <h3>M. Ibrahima Sow</h3>
+      <p class="periode">2019 - 2022</p>
+    </div>
+    
+  </div>
+</section>
+
+<!-- <section id="partenaires" class="section-partenaires">
+  <h2>Nos Partenaires</h2>
+  <div class="partenaires-container">
+    <div class="partenaire-card">
+      <img src="images/partenaire1.png" alt="Partenaire 1">
+    </div>
+    <div class="partenaire-card">
+      <img src="images/partenaire2.png" alt="Partenaire 2">
+    </div>
+    <div class="partenaire-card">
+      <img src="images/partenaire3.png" alt="Partenaire 3">
+    </div>
+    <div class="partenaire-card">
+      <img src="images/partenaire4.png" alt="Partenaire 4">
+    </div>
+    
+  </div>
+</section> -->
+
+<section id="partenaires" class="section-partenaires">
+  <div class="maire"><h2>PARTENAIRES</h2></div><br>
+  <div class="partenaires-container">
+    <div class="partenaire-logo">
+      <img src="images/logo.png" alt="Partenaire 1">
+    </div>
+    <div class="partenaire-logo">
+      <img src="images/logo.png" alt="Partenaire 2">
+    </div>
+    <div class="partenaire-logo">
+      <img src="images/logo.png" alt="Partenaire 3">
+    </div>
+    <div class="partenaire-logo">
+      <img src="images/partenaire4.png" alt="Partenaire 4">
+    </div>
+     <div class="partenaire-logo">
+      <img src="images/partenaire2.png" alt="Partenaire 2">
+    </div>
+    <div class="partenaire-logo">
+      <img src="images/partenaire3.png" alt="Partenaire 3">
+    </div>
+    <div class="partenaire-logo">
+      <img src="images/partenaire4.png" alt="Partenaire 4">
+    </div>
+    
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-columns">
+        <div class="footer-col">
+        
+        <div class="footer-line"></div><br><br>
+        <div class="navbar-footer">
+            <a href="#">ACCUEIL</a>
+            <div class="dropdown">
+              <a href="#">LA COMMUNE -></a>
+              <div class="dropdown-content">
+                <a href="#">Présentation</a>
+                <a href="#">Histoire</a>
+                <a href="#">Structures</a>
+              </div>
+            </div>
+            <a href="#">LE MAIRE</a>
+            <a href="#">LA CARTE</a>
+            <a href="https://villedepikine.sn/">LA VILLE DE PIKINE </a>
+            <a href="https://communedekeurmassar.site123.me/"> LA VILLE DE KEUR MASSAR </a>
+            <a href=""> COMMUNE DE  YEUMBEUL NORD </a>
+          </div>
+        </div>
+        <div class="footer-col">
+        <p>
+            <i class="fa-solid fa-location-dot" >   </i>   Située à 18km du centre ville se trouve dans le département de Pikine,au niveau de l’arrondissement
+            des Niayes. <br>  <i class="fa-solid fa-phone-volume">   </i>  Tel: 33 333 33 33 <br>
+             <i class="fa-solid fa-at"></i> nnnmmmmm@gmail.com
+        </p>
+        <div class="footer-line"></div>
+        </div>
+        <div class="footer-col">
+            <form>
+            <label for="email"><i style="color: aliceblue;">Vous pouvez nous contacter </i></label>
+            <input type="search" id="email" placeholder="Votre email ici ">
+            <textarea id="message" placeholder="Votre message ici"></textarea>
+            <input type="submit" value="Envoyer">
+          </form>
+       
+        </div>
+    </div>
+
+    <div class="footer-social">
+        <a href="https://www.facebook.com/p/Mairie-de-Yeumbeul-Sud-61558807681688/"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+    </div>
+
+    <div class="footer-copy">
+       <marquee style="color:#127200 ;"> &copy; Copyright 2025 Commune de Yeumbeul Sud.</marquee>
+    </div>
+   </footer>
+
+
+
+
+
+
+</body>
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+  let currentIndex = 0;
+  let interval = setInterval(nextSlide, 4000);
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      dots[i].classList.remove('active');
+    });
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function goToSlide(index) {
+    currentIndex = index;
+    showSlide(currentIndex);
+  }
+
+  next.addEventListener('click', () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  prev.addEventListener('click', () => {
+    prevSlide();
+    resetInterval();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      resetInterval();
+    });
+  });
+
+  function resetInterval() {
+    clearInterval(interval);
+   // interval = setInterval(nextSlide,);
+  }
+
+   //Initialiser l'affichage
+  showSlide(currentIndex);
+
+ window.addEventListener("scroll", function () {
+  const navbar = document.querySelector(".navbar");
+  const header = document.querySelector(".header-top");
+  const headerHeight = header.offsetHeight;
+
+  if (window.scrollY >= headerHeight) {
+    if (!navbar.classList.contains("fixed")) {
+      navbar.classList.add("fixed");
+    }
+  } else {
+    navbar.classList.remove("fixed");
+  }
+})
+
+function toggleSidebar() {
+  document.querySelector(".navbar-menu").classList.toggle("active");
+  document.querySelector(".overlay").classList.toggle("active");
+}
+
+</script>
+
+</html>
