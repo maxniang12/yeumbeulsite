@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ville de Yeumbeul Sud</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="lesScripts.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header-top">
+        <div class="messagerie">
+            <i class="fas fa-envelope"></i> <span>Messagerie</span>
+        </div>
+        <div class="header-center">
+            <h1 class="ville-titre">COMMUNE D’ARRONDISSEMENT DE YEUMBEUL   <span>  SUD</span> </h1>
+            <img src="images/accu2.png" alt="Blason Yeumbeul Sud" class="blason">
+        </div>
+   </header>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <!-- Bouton hamburger pour mobile -->
+        <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+
+        <!-- Menu -->
+        <div class="navbar-menu">
+            <a href="index.html">ACCUEIL</a>
+
+            <div class="dropdown">
+                <a href="">LA COMMUNE</a>
+                <div class="dropdown-content">
+                    <a href="comune.html">Présentation</a>
+                    <a href="historiq.html">Histoire</a>
+                    <a href="#">Structures</a>
+                </div>
+            </div>
+
+            <a href="#">LE MAIRE</a>
+            <a href="carte.html">LA CARTE</a>
+        </div>
+
+        <!-- Réseaux sociaux -->
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <!-- Overlay -->
+        <div class="overlay" onclick="toggleSidebar()"></div>
+    </nav>
+
+    
+</body>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+  let currentIndex = 0;
+  let interval = setInterval(nextSlide, 4000);
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      dots[i].classList.remove('active');
+    });
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function goToSlide(index) {
+    currentIndex = index;
+    showSlide(currentIndex);
+  }
+
+  next.addEventListener('click', () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  prev.addEventListener('click', () => {
+    prevSlide();
+    resetInterval();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      resetInterval();
+    });
+  });
+
+  function resetInterval() {
+    clearInterval(interval);
+   // interval = setInterval(nextSlide,);
+  }
+
+   //Initialiser l'affichage
+  showSlide(currentIndex);
+
+ window.addEventListener("scroll", function () {
+  const navbar = document.querySelector(".navbar");
+  const header = document.querySelector(".header-top");
+  const headerHeight = header.offsetHeight;
+
+  if (window.scrollY >= headerHeight) {
+    if (!navbar.classList.contains("fixed")) {
+      navbar.classList.add("fixed");
+    }
+  } else {
+    navbar.classList.remove("fixed");
+  }
+})
+
+function toggleSidebar() {
+  document.querySelector(".navbar-menu").classList.toggle("active");
+  document.querySelector(".overlay").classList.toggle("active");
+}
+
+</script>
+</html>
