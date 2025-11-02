@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
+    <!-- <style>
         .intro-section {
   display: flex;
   justify-content: center;
@@ -113,10 +113,85 @@
   background: linear-gradient(89deg, #89d957, #c9e265);
   border-radius: 2px;
 }
+ </style> -->
+
+ <style>
+  .projet-realise {
+  background-color: #f9f9f9;
+  padding: 60px 30px;
+  text-align: center;
+  color: #000;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Titre principal */
+.projet-realise .maire {
+  font-size: 22px;
+  font-weight: 700;
+  color: #127200;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  width: fit-content;
+  padding: 10px 25px;
+  background: linear-gradient(135deg, #b3f0a2, #ffffff);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid #b6e3b6;
+  border-radius: 8px;
+  margin: 0 auto 40px auto;
+}
+
+/* Conteneur des projets */
+.projet-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 45px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Carte du projet */
+.projet-card {
+  background-color: #fff;
+  overflow: hidden;
+  width: 400px;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.projet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 127, 50, 0.25);
+}
+
+/* Image du projet */
+.projet-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Titre */
+.projet-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin: 15px 15px 10px;
+  line-height: 1.3;
+}
+
+/* Texte période ou description */
+.projet-card .periode {
+  font-size: 14px;
+  color: #777;
+  margin: 0 15px 20px;
+  font-style: italic;
+}
+
  </style>
 </head>
 <body>
- <div class="intro-section">
+ <!-- <div class="intro-section">
   <div class="intro-container">
     <div class="intro-slider">
       <div class="carousel-slides">
@@ -156,9 +231,9 @@
 </div>
 
 
-<div class="ligne-gradient"></div>
+<div class="ligne-gradient"></div> -->
 
-<script>
+<!-- <script>
   const images = document.querySelectorAll('.carousel-image');
   const dots = document.querySelectorAll('.dot');
   const prevBtn = document.querySelector('.prev');
@@ -209,7 +284,38 @@
   }
 
   showSlide(current);
-</script>
+</script> -->
+
+
+<section class="projet-realise">
+  <div class="maire"><h2>Les projets</h2></div><br>
+  <div class="projet-container">
+    <div class="projet-card">
+      <img src="images/mairie.jpg" alt="Ancien Maire 1">
+      <h3>La reconstruction du mairie de Yeumbeul Sud</h3>
+      <p class="periode">Avril - 2020</p>
+    </div>
+
+    <div class="projet-card">
+      <img src="images/stade.jpg" alt="Ancien Maire 2">
+      <h3>Nouveau stade Pathé Wore Diop de Yeumbeul</h3>
+      <p class="periode">Août - 2022</p>
+    </div>
+
+    <div class="projet-card">
+      <img src="images/pavage.jpg" alt="Ancien Maire 3">
+      <h3>Les pavages des quartiers</h3>
+      <p class="periode">Avril - 2022</p>
+    </div>
+
+    <div class="projet-card">
+      <img src="images/ecole.jpg" alt="Ancien Maire 4">
+      <h3>CEM Djibril Gaye de Yeumbeul</h3>
+      <p class="periode">Décembre - 2021</p>
+    </div>
+  </div>
+</section>
+
 
 
 </body>
